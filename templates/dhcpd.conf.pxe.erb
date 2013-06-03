@@ -1,6 +1,8 @@
 # BEGIN PXE Section
-<% if @pxeserver and @pxefilename then -%>
+<% if @pxeserver then -%>
 next-server <%= @pxeserver %>;
+<% end -%>
+<% if @pxefilename then -%>
 filename "<%= @pxefilename %>";
 <% end -%>
 # END PXE Section

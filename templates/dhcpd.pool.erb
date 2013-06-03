@@ -14,6 +14,13 @@ subnet <%= network %> netmask <%= mask %> {
 
   option subnet-mask <%= mask %>;
   option routers <%= gateway %>;
+<% if ! @pxefilename then -%>
+  if exists user-class and option user-class = "iPXE" {
+    filename "razor.ipxe"; # we are in an iPXE kernel and load static script
+  } else {
+    filename "undionly.kpxe"; # we are in burned in PXE and load iPXE kernel
+  }
+<% end -%>
 <% if options.is_a? Array -%>
 <%   options.each do |opt| -%>
   option <%= opt %>;
